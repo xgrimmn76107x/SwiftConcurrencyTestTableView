@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		DB51D4892B0E4EA0000DCA10 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51D4882B0E4EA0000DCA10 /* API.swift */; };
+		DB6231E02C5A285100AEFBCE /* NonCopyableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6231DE2C5A285100AEFBCE /* NonCopyableViewController.swift */; };
+		DB6231E12C5A285100AEFBCE /* NonCopyableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB6231DF2C5A285100AEFBCE /* NonCopyableViewController.xib */; };
 		DB6252A02B0C961C00612FDE /* HeavyWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB62529F2B0C961C00612FDE /* HeavyWork.swift */; };
 		DBA9D1252B0C909F00B628AA /* ThreadExplosionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA9D1232B0C909F00B628AA /* ThreadExplosionViewController.swift */; };
 		DBA9D1262B0C909F00B628AA /* ThreadExplosionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBA9D1242B0C909F00B628AA /* ThreadExplosionViewController.xib */; };
@@ -43,6 +45,8 @@
 
 /* Begin PBXFileReference section */
 		DB51D4882B0E4EA0000DCA10 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		DB6231DE2C5A285100AEFBCE /* NonCopyableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonCopyableViewController.swift; sourceTree = "<group>"; };
+		DB6231DF2C5A285100AEFBCE /* NonCopyableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NonCopyableViewController.xib; sourceTree = "<group>"; };
 		DB62529F2B0C961C00612FDE /* HeavyWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeavyWork.swift; sourceTree = "<group>"; };
 		DBA9D1232B0C909F00B628AA /* ThreadExplosionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadExplosionViewController.swift; sourceTree = "<group>"; };
 		DBA9D1242B0C909F00B628AA /* ThreadExplosionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThreadExplosionViewController.xib; sourceTree = "<group>"; };
@@ -88,6 +92,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB6231DD2C5A282E00AEFBCE /* NonCopyable */ = {
+			isa = PBXGroup;
+			children = (
+				DB6231DE2C5A285100AEFBCE /* NonCopyableViewController.swift */,
+				DB6231DF2C5A285100AEFBCE /* NonCopyableViewController.xib */,
+			);
+			path = NonCopyable;
+			sourceTree = "<group>";
+		};
 		DBA9D1222B0C907E00B628AA /* ThreadExplosion */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +141,7 @@
 				DBA9D1282B0C937400B628AA /* FirstViewController.xib */,
 				DBA9D1222B0C907E00B628AA /* ThreadExplosion */,
 				DBDE939C2B3C7D1B00C55668 /* Sendable */,
+				DB6231DD2C5A282E00AEFBCE /* NonCopyable */,
 				DBD3D28E2B0C87B8005ABA74 /* Assets.xcassets */,
 				DBD3D2902B0C87B8005ABA74 /* LaunchScreen.storyboard */,
 				DBD3D2932B0C87B8005ABA74 /* Info.plist */,
@@ -266,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBD3D2922B0C87B8005ABA74 /* LaunchScreen.storyboard in Resources */,
+				DB6231E12C5A285100AEFBCE /* NonCopyableViewController.xib in Resources */,
 				DBA9D12A2B0C937400B628AA /* FirstViewController.xib in Resources */,
 				DBA9D1262B0C909F00B628AA /* ThreadExplosionViewController.xib in Resources */,
 				DBDE93A02B3C7D3300C55668 /* SendableViewController.xib in Resources */,
@@ -297,6 +312,7 @@
 				DBDE939F2B3C7D3300C55668 /* SendableViewController.swift in Sources */,
 				DBA9D1292B0C937400B628AA /* FirstViewController.swift in Sources */,
 				DBD3D2862B0C87B7005ABA74 /* AppDelegate.swift in Sources */,
+				DB6231E02C5A285100AEFBCE /* NonCopyableViewController.swift in Sources */,
 				DBD3D2882B0C87B7005ABA74 /* SceneDelegate.swift in Sources */,
 				DBA9D1252B0C909F00B628AA /* ThreadExplosionViewController.swift in Sources */,
 				DB51D4892B0E4EA0000DCA10 /* API.swift in Sources */,
@@ -490,7 +506,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.jay.TestConcurrency;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_STRICT_CONCURRENCY = targeted;
+				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -519,7 +535,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.jay.TestConcurrency;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_STRICT_CONCURRENCY = targeted;
+				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

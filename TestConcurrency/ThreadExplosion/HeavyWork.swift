@@ -7,7 +7,7 @@
 
 import Foundation
 
-class HeavyWork {
+enum HeavyWork {
     static func dispatchGlobal(seconds: UInt32, index: Int) {
 //        let queue = DispatchQueue(label: "qwe", attributes: .concurrent)
 //        let workItem1 = DispatchWorkItem(flags: .barrier) {
@@ -20,7 +20,7 @@ class HeavyWork {
             print("🐱 DispatchQueue: \(Date()), index:\(index)")
             sleep(seconds)
         }
-        
+
 //        DispatchQueue.global(qos: .background).async {
 //            print("🐱 global: \(Date()), index:\(index)")
 //            sleep(seconds)
@@ -34,7 +34,7 @@ class HeavyWork {
             sleep(seconds)
         }
     }
-    
+
     static func runUtilityTask(seconds: UInt32, index: Int) {
         Task(priority: .utility) {
             print("☕️ utility: \(Date()), index: \(index)")
@@ -42,7 +42,7 @@ class HeavyWork {
             sleep(seconds)
         }
     }
-    
+
     static func runBackgroundTask(seconds: UInt32, index: Int) {
         Task(priority: .background) {
             print("⬇️ background: \(Date()), index: \(index)")
@@ -50,11 +50,12 @@ class HeavyWork {
             sleep(seconds)
         }
     }
+
     static var account1 = BankAccount1()
     static var account2 = BankAccount2()
     static var account3 = BankAccount3()
     static var awaitSleep = false
-    
+
     static func lotOfActor(index: Int) {
         Task(priority: .high) {
             await account1.increment(1, index: index, awaitSleep: awaitSleep)
@@ -68,7 +69,6 @@ class HeavyWork {
     }
 }
 
-
 @globalActor
 actor SomeGlobalActor {
     static let shared = SomeGlobalActor()
@@ -76,7 +76,7 @@ actor SomeGlobalActor {
 
 actor BankAccount1 {
     var balance: Int = 0
-    
+
     func increment(_ amount: Int, index: Int, awaitSleep: Bool) async {
         if awaitSleep {
             try? await Task.sleep(seconds: 3)
@@ -88,11 +88,9 @@ actor BankAccount1 {
     }
 }
 
-
-
 actor BankAccount2 {
     var balance: Int = 0
-    
+
     func increment(_ amount: Int, index: Int, awaitSleep: Bool) async {
         if awaitSleep {
             try? await Task.sleep(seconds: 3)
@@ -105,7 +103,7 @@ actor BankAccount2 {
 
 actor BankAccount3 {
     var balance: Int = 0
-    
+
     func increment(_ amount: Int, index: Int, awaitSleep: Bool) async {
         if awaitSleep {
             try? await Task.sleep(seconds: 3)
