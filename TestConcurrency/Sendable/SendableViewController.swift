@@ -11,7 +11,7 @@ enum SendableItemSection {
     case dataRaceClass
     case actor
     case sendableStructure
-    
+
     var description: String {
         switch self {
         case .dataRaceClass:
@@ -25,21 +25,18 @@ enum SendableItemSection {
 }
 
 class SendableViewController: UIViewController {
+    @IBOutlet var tableView: UITableView!
 
-    @IBOutlet weak var tableView: UITableView!
-    
-    var itemSections: [SendableItemSection] = {
-        return [
-            .dataRaceClass,
-            .actor,
-            .sendableStructure
-        ]
-    }()
-    
+    var itemSections: [SendableItemSection] = [
+        .dataRaceClass,
+        .actor,
+        .sendableStructure,
+    ]
+
     let hotel = Hotel()
     var hotelSendable = HotelSendable()
     let hotelActor = HotelActor()
-    
+
     let someActor = SomeActor()
 
     override func viewDidLoad() {
@@ -47,13 +44,12 @@ class SendableViewController: UIViewController {
 
         setupTableView()
     }
-    
+
     func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self)
     }
-
 }
 
 extension SendableViewController: UITableViewDelegate, UITableViewDataSource {
@@ -86,6 +82,7 @@ extension SendableViewController: UITableViewDelegate, UITableViewDataSource {
             await testActorFunction(actor: someActor, hotel: hotel, number: number)
         }
     }
+
     func actor() {
         executeLoop { [weak self] number in
             guard let self else { return }
@@ -93,6 +90,7 @@ extension SendableViewController: UITableViewDelegate, UITableViewDataSource {
             await testFunctionActor(actor: self.someActor, hotel: self.hotelActor, number: number)
         }
     }
+
     func sendableStructure() {
         executeLoop { [weak self] number in
             guard let self else { return }
@@ -102,35 +100,37 @@ extension SendableViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-
 extension SendableViewController {
     func executeLoop(callback: @escaping (Int) async -> Void) {
-        for number in 0..<10000 {
+        for number in 0 ..< 10000 {
             Task.detached(operation: {
                 await callback(number)
             })
         }
     }
+
     func testActorFunction(actor: SomeActor, hotel: Hotel, number: Int) async {
         await actor.printHotelRoom(hotel: hotel, number: number)
     }
+
     func testFunctionSendable(actor: SomeActor, hotel: HotelSendable, number: Int) async {
         await actor.printHotelRoom(hotel: hotel, number: number)
     }
+
     func testFunctionActor(actor: SomeActor, hotel: HotelActor, number: Int) async {
         await actor.printHotelRoom(hotel: hotel, number: number)
     }
 }
 
-
 actor SomeActor {
-    
     func printHotelRoom(hotel: Hotel, number: Int) async {
         print("hotel append: \(number), hotel:\(hotel.room)")
     }
+
     func printHotelRoom(hotel: HotelActor, number: Int) async {
         print("hotel append: \(number), hotel:\(await hotel.room)")
     }
+
     func printHotelRoom(hotel: HotelSendable, number: Int) async {
         print("hotel append: \(number), hotel:\(hotel.room)")
     }
@@ -138,11 +138,31 @@ actor SomeActor {
 
 class Hotel {
     var room: Int = 0
+
+//    var room: Int {
+//        get {
+//            propertyLock.lock()
+//            defer {
+//                propertyLock.unlock()
+//            }
+//            return _room
+//        }
+//        set {
+//            propertyLock.lock()
+//            defer {
+//                propertyLock.unlock()
+//            }
+//            _room = newValue
+//        }
+//    }
+//
+//    private var _room: Int = 0
+//    private var propertyLock = NSLock()
 }
 
 actor HotelActor {
     var room: Int = 0
-    
+
     func setRoom(number: Int) {
         room += number
     }

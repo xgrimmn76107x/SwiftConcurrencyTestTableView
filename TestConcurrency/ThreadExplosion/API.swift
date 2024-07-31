@@ -5,27 +5,27 @@
 //  Created by JayHsia on 2023/11/22.
 //
 
-import UIKit
 import Foundation
+import UIKit
 
-class FetchImageManager {
+enum FetchImageManager {
     static let randomImageUrl = URL(string: "https://random.imagecdn.app/300/300")!
     @discardableResult
     static func downloadImage() async throws -> UIImage {
         let (data, response) = try await URLSession.shared.data(from: randomImageUrl)
-        guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
+        guard let response = response as? HTTPURLResponse, (200 ... 299).contains(response.statusCode) else {
             throw CancellationError()
         }
         return UIImage(data: data)!
     }
-    
+
     static func downloadImage(completion: @escaping (UIImage?, Error?) -> Void) {
-        URLSession.shared.dataTask(with: randomImageUrl) { data, response, error in
+        URLSession.shared.dataTask(with: randomImageUrl) { data, _, error in
             if let error = error {
                 completion(nil, error)
                 return
             }
-            
+
             if let data = data, let image = UIImage(data: data) {
                 completion(image, nil)
             } else {
@@ -34,7 +34,6 @@ class FetchImageManager {
         }.resume()
     }
 }
-
 
 extension Task where Success == Never, Failure == Never {
     static func sleep(seconds: UInt32) async throws {
