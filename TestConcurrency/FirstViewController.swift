@@ -10,6 +10,7 @@ import UIKit
 enum ItemSection {
     case threadExplosion
     case sendable
+    case nonCopyable
 
     var description: String {
         switch self {
@@ -17,6 +18,8 @@ enum ItemSection {
             return "Thread Explosion"
         case .sendable:
             return "Sendable"
+        case .nonCopyable:
+            return "NonCopyable"
         }
     }
 }
@@ -37,6 +40,7 @@ class FirstViewController: UIViewController {
         itemSections = [
             .threadExplosion,
             .sendable,
+            .nonCopyable
         ]
     }
 
@@ -89,6 +93,8 @@ extension FirstViewController: UITableViewDelegate, UITableViewDataSource {
             navigationController?.pushViewController(ThreadExplosionViewController(), animated: true)
         case .sendable:
             navigationController?.pushViewController(SendableViewController(), animated: true)
+        case .nonCopyable:
+            navigationController?.pushViewController(NonCopyableViewController(), animated: true)
         }
     }
 }
